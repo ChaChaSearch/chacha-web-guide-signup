@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project basedir="../../" default="runFindBugs">
+
+	<property name="shared.lib" value="./lib"/>
+	
+	<path id="findbugs.classpath">
+		<pathelement location="${shared.lib}/findBugs/lib/findbugs-ant.jar" />
+	</path>
+	
+	<property name="findbugs.home" value="${shared.lib}/findBugs/" />
+	
+	<taskdef resource="edu/umd/cs/findbugs/anttask/tasks.properties" classpathref="findbugs.classpath"/>
+	
+	<target name="check-findbugs-filters">
+		<available file="findbugs-filters.xml" property="findbugs.filtered" />
+	</target>
+	
+	<target name="runFindBugsFiltered" depends="check-findbugs-filters" if="findbugs.filtered">
+		<findbugs home="${findbugs.home}" output="xml" jvmargs="-Xmx512m" outputFile="FindBugs.xml" excludeFilter="findbugs-filters.xml" effort="max" timeout="300000">
+			<sourcePath path="${basedir}/src" />
+			<class location="${basedir}/build" />
+			<auxClasspath refid="project.classpath" />
+		</findbugs>
+	</target>
+
+	<target name="runFindBugsFiltered-html" depends="check-findbugs-filters" if="findbugs.filtered">
+		<findbugs home="${findbugs.home}" output="html" jvmargs="-Xmx512m" outputFile="FindBugs.html" excludeFilter="findbugs-filters.xml" effort="max" timeout="300000">
+			<sourcePath path="${basedir}/src" />
+			<class location="${basedir}/build" />
+			<auxClasspath refid="project.classpath" />
+		</findbugs>
+	</target>
+	
+	<target name="runFindBugsUnfiltered" depends="check-findbugs-filters" unless="findbugs.filtered">
+		<findbugs home="${findbugs.home}" output="xml" jvmargs="-Xmx512m" outputFile="FindBugs.xml" effort="max" timeout="300000">
+			<sourcePath path="${basedir}/src" />
+			<class location="${basedir}/build" />
+			<auxClasspath refid="project.classpath" />
+		</findbugs>
+	</target>
+	
+	<target name="runFindBugsUnfiltered-html" depends="check-findbugs-filters" unless="findbugs.filtered">
+		<findbugs home="${findbugs.home}" output="html" jvmargs="-Xmx512m" outputFile="FindBugs.html" effort="max" timeout="300000">
+			<sourcePath path="${basedir}/src" />
+			<class location="${basedir}/build" />
+			<auxClasspath refid="project.classpath" />
+		</findbugs>
+	</target>
+
+	<target name="runFindBugs" depends="runFindBugsFiltered, runFindBugsUnfiltered"/>
+	<target name="runFindBugs-html" depends="runFindBugsFiltered-html, runFindBugsUnfiltered-html"/>
+</project>

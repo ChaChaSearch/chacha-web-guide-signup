@@ -1,0 +1,16 @@
+/*.sql
+bin
+build
+build-test
+lib
+dist
+reports
+.classpath*
+ivy_delivered.xml
+.settings
+.DS_Store
+WebContent/.DS_Store
+temp-war-deps
+ivy_delivered.xml
+WebContent/static/fact/js/extjs-*
+bin

@@ -1,0 +1,21 @@
+<project basedir="../../">
+
+	<property name="clover.jar" location="${shared.lib}/clover-ant-2.3.2/lib/clover.jar"/>
+	<taskdef resource="cloverlib.xml" classpath="${clover.jar}"/>
+	
+	<target name="with.clover">
+    	<clover-setup/>
+ 	</target>
+ 	
+ 	<target name="clover.xml">
+    	<clover-report>
+       		<current outfile="coverage.xml">
+          		<format type="xml"/>
+       		</current>
+    	</clover-report>
+ 	</target>
+ 	
+ 	<target name="clover.clean">
+ 		<clover-clean/>
+ 	</target>
+ </project>

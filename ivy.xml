@@ -1,0 +1,70 @@
+<?xml-stylesheet type="text/xsl" href="http://www.ivyrep.org/ivy-doc.xsl"?>
+<ivy-module version="1.0">
+	<info organisation="com.chacha" module="chacha-app-answer-service">
+		<repository name="OpenNMS" url="http://repo.opennms.org/maven2"/>
+	</info>
+
+	<dependencies>
+		<!-- ChaCha Deps -->
+		<dependency name="chacha-core-camel" rev="9.0.+"/>
+		<dependency name="chacha-core-beans" rev="9.0.+"/>
+		<dependency name="chacha-core-spring" rev="1.0.+"/>
+		<dependency name="chacha-core-data" rev="9.0.+"/>
+		<dependency name="chacha-core-utilities" rev="9.0.+"/>
+		<dependency name="chacha-core-profiling" rev="7.0.+" />
+
+		<!-- 3rd Party Deps -->
+
+		<!-- ActiveMQ -->
+		<dependency org="org.apache.activemq" name="activemq-camel" rev="5.6.0" conf="*->default"/>
+		<dependency org="org.apache.activemq" name="activemq-core" rev="5.6.0" conf="*->default"/>
+		<dependency org="org.apache.activemq" name="activemq-pool" rev="5.6.0" conf="*->default"/>
+
+		<!-- Camel -->
+		<dependency org="org.apache.camel" name="camel-core" rev="2.10.3" conf="*->default"/>
+		<dependency org="org.apache.camel" name="camel-jms" rev="2.10.3" conf="*->default"/>
+		<dependency org="org.apache.camel" name="camel-jackson" rev="2.10.3" conf="*->default"/>
+		<dependency org="org.apache.camel" name="camel-mvel" rev="2.10.3" conf="*->default"/>
+		<dependency org="org.apache.camel" name="camel-test" rev="2.10.3" conf="*->default"/>
+		<dependency org="com.bluelock" name="camel-spring-amqp" rev="1.2"/>
+		<dependency org="org.springframework.amqp" name="spring-amqp" rev="1.1.3.RELEASE"/>
+
+		<!-- Spring -->
+		<dependency org="org.springframework" name="spring-core" rev="3.1.2.RELEASE" conf="*->default"/>
+		<dependency org="org.springframework" name="spring-context" rev="3.1.2.RELEASE" conf="*->default"/>
+		<dependency org="org.springframework" name="spring-beans" rev="3.1.2.RELEASE" conf="*->default"/>
+		<dependency org="org.springframework" name="spring-context-support" rev="3.1.2.RELEASE" conf="*->default"/>
+		<dependency org="org.springframework" name="spring-orm" rev="3.1.2.RELEASE" conf="*->default"/>
+
+		<!-- Hibernate/DB -->
+		<dependency org="org.hibernate" name="hibernate-core" rev="3.6.10.Final"/>
+		<dependency org="org.hibernate" name="hibernate-validator" rev="4.0.2.GA"/>
+		<dependency org="mysql" name="mysql-connector-java" rev="5.1.14"/>
+		<dependency org="c3p0" name="c3p0" rev="0.9.1.2"/>
+		<dependency org="net.sf.ehcache" name="ehcache-core" rev="2.4.7"/>
+
+		<!-- Cassandra -->
+		<dependency org="com.netflix.astyanax" name="astyanax" rev="1.0.6"/>
+
+		<!-- Logging -->
+		<dependency org="log4j" name="log4j" rev="1.2.16"/>
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.1"/>
+
+		<!-- Utility Libs -->
+		<dependency org="commons-cli" name="commons-cli" rev="1.2"/>
+		<dependency org="com.google.guava" name="guava" rev="r09"/>
+		<dependency org="org.codehaus.groovy" name="groovy-all" rev="1.8.1"/>
+		<dependency org="commons-lang" name="commons-lang" rev="2.5"/>
+		<dependency org="joda-time" name="joda-time" rev="1.6.2"/>
+		<dependency org="org.msgpack" name="msgpack" rev="0.6.7"/>
+
+		<!-- Test Libs -->
+		<dependency org="junit" name="junit" rev="4.8.2"/>
+		<dependency org="org.mockito" name="mockito-core" rev="1.8.5"/>
+
+
+		<!-- Exclusions -->
+		<exclude org="org.slf4j" module="slf4j-jdk14"/>
+	</dependencies>
+</ivy-module>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project basedir="../../" default="pmd-all">
+
+	<property name="shared.lib" value="./lib"/>
+	
+	<path id="pmd.classpath">
+		<pathelement location="${shared.lib}/pmd/lib/asm-3.1.jar" />
+		<pathelement location="${shared.lib}/pmd/lib/jaxen-1.1.1.jar" />
+		<pathelement location="${shared.lib}/pmd/lib/junit-4.4.jar" />
+		<pathelement location="${shared.lib}/pmd/lib/pmd-4.2.2.jar" />
+	</path>
+	
+	<property name="pmd.home" value="${shared.lib}/pmd/" />
+	
+	<target name="pmd-all" depends="pmd,cpd"/>
+	<target name="pmd-all-html" depends="pmd-html,cpd-html"/>
+	
+	<target name="pmd">
+		<mkdir dir="${report.dir}"/>
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
+		<pmd rulesetfiles="basic,braces,clone,codesize,coupling,design,imports,unusedcode">
+	    	<formatter type="xml" toFile="${report.dir}/pmd.xml"/>
+	        <fileset dir="${basedir}/src">
+	            <include name="**/*.java"/>
+	        </fileset>
+	    </pmd>
+	</target>
+
+	<target name="pmd-html">
+		<mkdir dir="${report.dir}"/>
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
+		<pmd rulesetfiles="basic,braces,clone,codesize,coupling,design,imports,unusedcode">
+	    	<formatter type="html" toFile="${report.dir}/pmd.html"/>
+	        <fileset dir="${basedir}/src">
+	            <include name="**/*.java"/>
+	        </fileset>
+	    </pmd>
+	</target>
+	
+	<target name="cpd">
+		<mkdir dir="${report.dir}"/>
+		<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="pmd.classpath" />
+		<cpd minimumTokenCount="50" format="xml" outputFile="${report.dir}/cpd.xml">
+			<fileset dir="${basedir}/src">
+				<include name="**/*.java"/>
+			</fileset>
+		</cpd>
+	</target>
+	<target name="cpd-html">
+		<mkdir dir="${report.dir}"/>
+		<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="pmd.classpath" />
+		<cpd minimumTokenCount="50" format="html" outputFile="${report.dir}/cpd.xml">
+			<fileset dir="${basedir}/src">
+				<include name="**/*.java"/>
+			</fileset>
+		</cpd>
+	</target>
+</project>

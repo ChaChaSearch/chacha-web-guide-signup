@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project>
+	<property name="jruby.home" value="${basedir}/lib/.jruby"/>
+
+	<target name="-compile-steps" depends="-define-paths">
+		<mkdir dir="build-integ-test"/>
+		<groovyc srcdir="integration" destdir="build-integ-tests" classpathref="compile.classpath" encoding="UTF-8"/>
+	</target>
+
+	<target name="cucumber" depends="-compile-steps,-install-gems" description="Run Cucumber">
+		<mkdir dir="reports/junit-report"/>
+		<taskdef name="cucumber" classname="cuke4duke.ant.CucumberTask" classpathref="compile.classpath"/>
+		<cucumber
+				args="--verbose --color --format pretty --format junit --out target/junit-report --guess features"
+			objectFactory="pico">
+			<jvmarg value="-Dchacha.config.dir=conf/test"/>
+			<classpath>
+				<pathelement location="conf"/>
+				<pathelement location="build"/>
+				<pathelement location="build-tests"/>
+				<pathelement location="build-integ-test"/>
+			</classpath>
+		</cucumber>
+	</target>
+
+	<target name="-install-gems" depends="-define-paths" if="gems">
+		<taskdef name="gem" classname="cuke4duke.ant.GemTask" classpathref="compile.classpath"/>
+
+		<gem args="install cuke4duke --version 0.4.3"/>
+	</target>
+
+	<target name="-define-paths">
+		<path id="jruby.classpath">
+			<fileset dir="lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+
+		<path id="compile.classpath">
+			<fileset dir="lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+	</target>
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project basedir="." default="cargostart">
+	<property name="tomcat.port" value="8080"/>
+	
+	<taskdef resource="cargo.tasks">
+		<classpath>
+			<fileset dir="${shared.lib}">
+				<include name="ant-extensions/cargo*.jar"/>
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="cargostart" depends="dist-war">
+		<delete dir="${build.dir}/cargo" />
+		<mkdir dir="${build.dir}/cargo" />
+		
+		<echo message="Starting Cargo..." />
+		<echo message="Using tomcat.home = ${tomcat.home} " />
+		<echo message="Using war = ${dist.war} " />
+
+		<cargo containerId="tomcat5x" home="${tomcat.home}" action="start">
+			<sysproperty key="chacha.environment" value="${chacha.environment}"/>
+			<sysproperty key="chacha.config.dir" value="${chacha.config.dir}"/>
+
+			<configuration home="${build.dir}/cargo">
+				<property name="cargo.servlet.port" value="${tomcat.port}" />
+				<property name="cargo.logging" value="high" />
+
+				<deployable type="war" file="${dist.war}" />
+			</configuration>
+		</cargo>
+	</target>
+</project>

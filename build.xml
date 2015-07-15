@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project basedir="." name="chacha-web-guide-signup">
+
+	<property file="build.properties" />
+	<import file="${shared.xml}/ant/build-basic-targets.xml"/>
+	<import file="${shared.xml}/ant/build-eclipse-classpath.xml"/>
+	<import file="${shared.xml}/ant/build-findBugs-targets.xml" />
+	<import file="${shared.xml}/ant/build-pmd-targets.xml" />
+
+	<path id="dist.classpath">
+		<path refid="webapp.classpath.fileset" />
+	</path>
+
+	<path id="webapp.classpath.fileset">
+		<path refid="lib.jars" />
+	</path>
+
+	<path id="lib.jars">
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<path id="project.classpath">
+		<path refid="webapp.classpath.fileset"/>
+	</path>
+
+
+</project>
