@@ -1,3 +1,0 @@
-[submodule "chacha-core-build"]
-	path = chacha-core-build
-	url = git@github.com:ChaChaSearch/chacha-core-build.git
