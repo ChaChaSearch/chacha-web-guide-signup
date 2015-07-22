@@ -25,5 +25,9 @@
 		<path refid="webapp.classpath.fileset"/>
 	</path>
 
+	<!-- Added this because cleaning and resolving is a fucking nightmare from the vpn -->
+	<target name="clean-dist">
+		<delete dir="dist" failonerror="false"/>
+	</target>
 
 </project>

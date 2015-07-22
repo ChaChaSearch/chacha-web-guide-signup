@@ -1,0 +1,28 @@
+.input-body {
+	margin: 2em 5em;
+}
+
+.input-section {
+	margin: 1em 0;
+	display: table;
+}
+
+.input-row {
+	margin: 0.1em 0;
+	display: table-row;
+}
+
+.input-row label {
+	display: table-cell;
+	font-size: 70%;
+}
+.input-row input {
+	display: table-cell;
+}
+
+.error {
+	color: red;
+}
+.hidden {
+	display:none;
+}

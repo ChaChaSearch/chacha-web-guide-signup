@@ -27,7 +27,7 @@
 
 	<context:property-placeholder properties-ref="configProps"/>
 
-	<import resource="chacha-web-guide-signup-messaging.xml"/>
+	<import resource="chacha-web-guide-signup-web.xml"/>
 	<import resource="chacha-web-guide-signup-data.xml"/>
 	<import resource="chacha-web-guide-signup.xml"/>
 

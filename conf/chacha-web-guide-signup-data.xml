@@ -4,14 +4,23 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<bean id="userDao" class="com.chacha.guide.signup.dao.UserDAO">
+		<property name="dataSource" ref="chachaDataSource" />
+	</bean>
+	
+	<bean id="vendorDao" class="com.chacha.guide.signup.dao.VendorDAO">
+		<property name="dataSource" ref="integrationDataSource" />
+	</bean>
+
+
+	<bean id="chachaDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
-		<property name="jdbcUrl" value="${database.url}"/>
-		<property name="user" value="${database.username}"/>
-		<property name="password" value="${database.password}"/>
+		<property name="jdbcUrl" value="${database.chacha.url}"/>
+		<property name="user" value="${database.chacha.username}"/>
+		<property name="password" value="${database.chacha.password}"/>
 		<property name="initialPoolSize" value="1"/>
 		<property name="minPoolSize" value="1"/>
-		<property name="maxPoolSize" value="${database.pool.maxSize}"/>
+		<property name="maxPoolSize" value="${database.chacha.pool.maxSize}"/>
 		<property name="acquireIncrement" value="2"/>
 		<property name="idleConnectionTestPeriod" value="18"/>
 		<property name="testConnectionOnCheckin" value="true"/>
@@ -19,28 +28,21 @@
 		<property name="maxStatementsPerConnection" value="0"/>
 		<property name="maxIdleTime" value="1800"/>
 	</bean>
-
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="mappingLocations">
-			<list>
-			</list>
-		</property>
-		<property name="annotatedClasses">
-			<list>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				hibernate.show_sql=${database.showSql}
-				hibernate.cache.region.factory_class=net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory
-				hibernate.cache.use_query_cache=false
-				hibernate.cache.use_second_level_cache=true
-				hibernate.connection.release_mode=auto
-				hibernate.generate_statistics=true
-			</value>
-		</property>
+	
+	<bean id="integrationDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="${database.integration.url}"/>
+		<property name="user" value="${database.integration.username}"/>
+		<property name="password" value="${database.integration.password}"/>
+		<property name="initialPoolSize" value="1"/>
+		<property name="minPoolSize" value="1"/>
+		<property name="maxPoolSize" value="${database.integration.pool.maxSize}"/>
+		<property name="acquireIncrement" value="2"/>
+		<property name="idleConnectionTestPeriod" value="18"/>
+		<property name="testConnectionOnCheckin" value="true"/>
+		<property name="preferredTestQuery" value="select 1;"/>
+		<property name="maxStatementsPerConnection" value="0"/>
+		<property name="maxIdleTime" value="1800"/>
 	</bean>
 
 
