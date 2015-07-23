@@ -21,6 +21,7 @@
 					<p class="input-row">
 						<label for="middle-initial">Middle Initial</label>
 						<input id="middle-initial" type="text" name="middleInitial"/>
+						<span id="middle-initial-error" class="error hidden">Middle Initial must be single letter</span>
 					</p>
 					
 					<p class="input-row">
@@ -187,6 +188,7 @@
 		
 		function validate() {
 			var isValid = validateRequiredFields()
+							&& validateMiddleInit()
 							&& validateEmail()
 							&& validateHandle()
 							&& validateSSN()
@@ -221,6 +223,19 @@
 				$("#required-fields-error").addClass("hidden");
 			} else {
 				$("#required-fields-error").removeClass("hidden");
+			}
+			
+			return isValid
+		}
+		
+		function validateMiddleInit() {
+			var middleInit = $("#middle-initial").val();
+			var isValid = middleInit.length <= 1;
+			
+			if(isValid) {
+				$("#middle-initial-error").addClass("hidden");
+			} else {
+				$("#middle-initial-error").removeClass("hidden");
 			}
 			
 			return isValid
@@ -284,12 +299,12 @@
 		}
 		
 		function validateSSN() {
-			if($("#government-id-type").val() != 'ssn') {
+			if($("#government-id-type").val() != 'SSN') {
 				return true;
 			}
 			
 			var ssn = $("#government-id").val();
-			var re = /^[0-9]{3}-[0-9]{2}-[0-9]{4}$/i;
+			var re = /^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/i;
 			var isValid = re.test(ssn);	
 			
 			if(isValid) {
@@ -307,18 +322,21 @@
 						$("#government-id-error").text("Social Security Number must be valid and unique. Format: XXX-XX-XXXX");
 					}
 				});
+			} else {
+				$("#government-id-error").removeClass("hidden");
+				$("#government-id-error").text("Social Security Number must be valid and unique. Format: XXX-XX-XXXX");
 			}
 			
 			return isValid;
 		}
 		
 		function validateEIN() {
-			if($("#government-id-type").val() != 'ein') {
+			if($("#government-id-type").val() != 'EIN') {
 				return true;
 			}
 			
 			var ein = $("#government-id").val();
-			var re = /^[0-9]{2}-[0-9]{7}$/i;
+			var re = /^[0-9]{2}-?[0-9]{7}$/i;
 			var isValid = re.test(ein);	
 			
 			if(isValid) {
@@ -336,6 +354,9 @@
 						$("#government-id-error").text("Employment Identification Number must be valid and unique. Format: XX-XXXXXXX");
 					}
 				});
+			} else {
+				$("#government-id-error").removeClass("hidden");
+				$("#government-id-error").text("Employment Identification Number must be valid and unique. Format: XX-XXXXXXX");
 			}
 			
 			return isValid;

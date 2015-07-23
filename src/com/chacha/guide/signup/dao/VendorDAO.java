@@ -8,8 +8,8 @@ import com.chacha.guide.signup.beans.OldWorldUser;
 
 public class VendorDAO extends JdbcDaoSupport {
 
-	private static final String QUERY_UNIQUE_SSN = "SELECT 1 FROM users WHERE ssn=aes_encrypt(?, f_seed())";
-	private static final String QUERY_UNIQUE_EIN = "SELECT 1 FROM users WHERE ein=aes_encrypt(?, f_seed())";
+	private static final String QUERY_UNIQUE_SSN = "SELECT 1 FROM vendor WHERE ssn=aes_encrypt(?, f_seed())";
+	private static final String QUERY_UNIQUE_EIN = "SELECT 1 FROM vendor WHERE ein=aes_encrypt(?, f_seed())";
 	
 	private static final String INSERT_VENDOR_RECORD =
 			"INSERT INTO vendor "

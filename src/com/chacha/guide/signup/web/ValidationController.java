@@ -36,12 +36,12 @@ public class ValidationController {
 	@RequestMapping(value="/ssn", method=RequestMethod.POST)
 	@ResponseBody
 	public String isUniqueSSN(@RequestParam("value") String ssn) {
-		return String.valueOf(databaseService.isUniqueSSN(ssn));
+		return String.valueOf(databaseService.isUniqueSSN(ssn.replace("-", "")));
 	}
 	
 	@RequestMapping(value="/ein", method=RequestMethod.POST)
 	@ResponseBody
 	public String isUniqueEIN(@RequestParam("value") String ein) {
-		return String.valueOf(databaseService.isUniqueEIN(ein));
+		return String.valueOf(databaseService.isUniqueEIN(ein.replace("-", "")));
 	}
 }
